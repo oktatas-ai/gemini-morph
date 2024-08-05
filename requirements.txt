@@ -1,2 +1,3 @@
 datasets
 google-generativeai
+pillow
