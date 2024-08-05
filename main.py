@@ -33,3 +33,8 @@ def load_processed_data(file_path):
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return []
+
+def save_processed_data(file_path, data):
+    """Save processed data to a JSON file."""
+    with open(file_path, "w") as f:
+        json.dump(data, f, indent=4)
