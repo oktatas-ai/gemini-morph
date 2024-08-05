@@ -5,6 +5,7 @@ import google.generativeai as genai
 import io
 import base64
 import hashlib
+import json
 
 dotenv.load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -24,3 +25,11 @@ def hash_image(image):
     with io.BytesIO() as buffered:
         image.save(buffered, format="PNG")
         return hashlib.md5(buffered.getvalue()).hexdigest()
+
+def load_processed_data(file_path):
+    """Load existing processed data from a JSON file."""
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
