@@ -44,12 +44,12 @@ def process_images(dataset):
     processed_data = load_processed_data("output.json")
     processed_hashes = {data["hash"] for data in processed_data}
 
-    for i, entry in enumerate(dataset["train"]):
+    for i, entry in enumerate(dataset["train"], start=1):
         image = entry.get("image")
         image_hash = hash_image(image)
 
         if image_hash in processed_hashes:
-            print(f"Skipping Image {i+1}: Already processed.")
+            print(f"Skipping Image {i}: Already processed.")
             continue
 
         model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")
@@ -70,7 +70,10 @@ def process_images(dataset):
         )
 
         save_processed_data("output.json", processed_data)
-        print(f"Processed Image {i+1}: {prompt}")
+        print(f"Processed Image {i}: {prompt}")
+
+        if 10 <= i:
+            break
 
 if __name__ == "__main__":
     process_images(dataset)
