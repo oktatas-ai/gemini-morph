@@ -66,8 +66,15 @@ def process_images(dataset):
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         for i, entry in enumerate(dataset["train"], start=1):
-            if i > 10:
+            if len(tasks) >= 10 - len(processed_data):
                 break
+
+            code = entry.get("code")
+            code_length = len(code)
+
+            if code_length < 200 or code_length > 2000:
+                print(f"Skipping Image {i}: Invalid code length.")
+                continue
 
             image = entry.get("image")
             image_hash = hash_image(image)
