@@ -38,3 +38,39 @@ def save_processed_data(file_path, data):
     """Save processed data to a JSON file."""
     with open(file_path, "w") as f:
         json.dump(data, f, indent=4)
+
+def process_images(dataset):
+    """Process images in the dataset and generate prompts."""
+    processed_data = load_processed_data("output.json")
+    processed_hashes = {data["hash"] for data in processed_data}
+
+    for i, entry in enumerate(dataset["train"]):
+        image = entry.get("image")
+        image_hash = hash_image(image)
+
+        if image_hash in processed_hashes:
+            print(f"Skipping Image {i+1}: Already processed.")
+            continue
+
+        model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")
+        response = model.generate_content(
+            [
+                "Write a very detailed prompt of this image. Your response should be one paragraph long, and should describe the image in detail just like an image generation prompt. Include every number, symbol, and letter from the image in your description.",
+                image,
+            ]
+        )
+
+        prompt = response.text
+        processed_data.append(
+            {
+                "hash": image_hash,
+                "code": entry["code"],
+                "prompt": prompt,
+            }
+        )
+
+        save_processed_data("output.json", processed_data)
+        print(f"Processed Image {i+1}: {prompt}")
+
+if __name__ == "__main__":
+    process_images(dataset)
