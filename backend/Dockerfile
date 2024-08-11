@@ -7,12 +7,15 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Set the environment variable
+ENV PORT=5000
+
 # Install any needed packages specified in requirements.txt
 RUN pip install flask
 
 # Install LaTeX and pdf2svg
 RUN apt-get update && \
-    apt-get install -y texlive-latex-base texlive-pictures pdf2svg && \
+    apt-get install -y texlive-latex-base texlive-pictures texlive-latex-extra pdf2svg && \
     apt-get clean
 
 # Make port 5000 available to the world outside this container
