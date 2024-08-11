@@ -9,9 +9,9 @@ import json
 import concurrent.futures
 
 dotenv.load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GOOGLE_GENERATIVE_AI_API_KEY = os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
 
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key=GOOGLE_GENERATIVE_AI_API_KEY)
 
 dataset = datasets.load_dataset("HuggingFaceM4/datikz")
 
