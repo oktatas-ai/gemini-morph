@@ -2,6 +2,8 @@
 
 import { useChat } from 'ai/react';
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
