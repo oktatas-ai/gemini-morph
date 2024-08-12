@@ -14,9 +14,13 @@ export async function POST(req: Request) {
       "\n" +
       'Example User Request: "Create a TikZ diagram of a triangle."\n' +
       "Expected Response:\n" +
+      "\\documentclass{standalone}\n" +
+      "\\usepackage{tikz}\n" +
+      "\\begin{document}\n" +
       "\\begin{tikzpicture}\n" +
       "    \\draw (0,0) -- (2,0) -- (1,1.732) -- cycle;\n" +
-      "\\end{tikzpicture}",
+      "\\end{tikzpicture}\n" +
+      "\\end{document}",
     messages: convertToCoreMessages(messages),
   });
 
