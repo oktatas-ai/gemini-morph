@@ -12,7 +12,7 @@ export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
       )}
       {...props}
     >
-      Open source app with{' '}
+      Open source app powered by{' '}
       <FooterLink href="https://ai.google.dev/gemini-api">
         Google Gemini
       </FooterLink>

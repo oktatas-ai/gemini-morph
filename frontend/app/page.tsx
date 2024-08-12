@@ -3,6 +3,7 @@
 "use client";
 
 import { ChatPanel } from "@/components/chat-panel";
+import { Spinner } from "@/components/spinner";
 import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 
@@ -13,6 +14,12 @@ export default function Home() {
     useChat();
 
   const [image, setImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const chatFunction = async (event: { preventDefault?: () => void; } | undefined): Promise<void> => {
+    setLoading(true);
+    await handleSubmit(event);
+  }
 
   const render = async (latex: string) => {
     try {
@@ -35,6 +42,7 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching image:", error);
     } finally {
+      setLoading(false);
     }
   };
 
@@ -51,17 +59,21 @@ export default function Home() {
   return (
     <>
       <div className="h-full container mx-auto flex items-center justify-center">
-        {image && (
-          <img
-            src={image}
-            alt="Generated"
-            className="w-full h-full max-h-[50dvh]"
-          />
+        {loading ? (
+          <Spinner />
+        ) : (
+          image && (
+            <img
+              src={image}
+              alt="Generated"
+              className="w-full h-full max-h-[50dvh]"
+            />
+          )
         )}
       </div>
 
       <ChatPanel
-        handleSubmit={handleSubmit}
+        handleSubmit={chatFunction}
         handleInputChange={handleInputChange}
         input={input}
       />
