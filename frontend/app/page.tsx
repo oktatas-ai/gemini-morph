@@ -4,6 +4,7 @@
 
 import { ChatPanel } from "@/components/chat-panel";
 import { Spinner } from "@/components/spinner";
+import { cn } from "@/lib/utils";
 import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 
@@ -16,10 +17,12 @@ export default function Home() {
   const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const chatFunction = async (event: { preventDefault?: () => void; } | undefined): Promise<void> => {
+  const chatFunction = async (
+    event: { preventDefault?: () => void } | undefined
+  ): Promise<void> => {
     setLoading(true);
     await handleSubmit(event);
-  }
+  };
 
   const render = async (latex: string) => {
     try {
@@ -58,17 +61,20 @@ export default function Home() {
 
   return (
     <>
-      <div className="h-full container mx-auto flex items-center justify-center">
-        {loading ? (
-          <Spinner />
-        ) : (
-          image && (
-            <img
-              src={image}
-              alt="Generated"
-              className="w-full h-full max-h-[50dvh]"
-            />
-          )
+      <div className="h-full container mx-auto flex items-center justify-center relative">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <Spinner />
+          </div>
+        )}
+        {image && (
+          <img
+            src={image}
+            alt="Generated"
+            className={cn("w-full h-full max-h-[50dvh]", {
+              "opacity-50": loading,
+            })}
+          />
         )}
       </div>
 
