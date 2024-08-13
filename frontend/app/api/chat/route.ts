@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = await streamText({
-    model: google("models/gemini-1.5-pro-latest"),
+    model: google("tunedModels/gemini-morph--2k-model-jyv9zaqd8ewy"),
     system:
       "You are an AI model specialized in generating LaTeX TikZ code for illustrations. " +
       "When a user requests an illustration, respond with the LaTeX code only, without any additional explanations or comments. " +
