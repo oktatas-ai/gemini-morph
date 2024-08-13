@@ -11,9 +11,11 @@ Gemini Morph is an AI image generator based on Gemini that will serve as the ima
 
 <h2  id="features">Features</h2>
 
-- **🌎 Real-time Visualizations**: Our AI model generates LaTeX TikZ code to create mathematical illustrations in real-time.
-- **🚀 Google Cloud Platform Integration**: The backend is hosted on Google Cloud, running within a Docker container.
-- **🔗 Demo Access**: A demo is available on our [website](https://gemini.oktatas.ai), allowing users to generate GenAI illustrations.
+**🌎 Real-time Visualizations**: Our AI model generates LaTeX TikZ code to create mathematical illustrations in real-time.
+
+**🚀 Google Cloud Platform Integration**: The backend is hosted on Google Cloud, running within a Docker container.
+
+**🔗 Demo Access**: A demo is available on our [website](https://gemini.oktatas.ai), allowing users to generate GenAI illustrations.
 
 <h2 id="getting-started">Getting Started</h2>
 
